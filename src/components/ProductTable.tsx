@@ -1,5 +1,8 @@
 import { useState, useContext, useEffect, FormEvent } from "react";
 import axios from "axios";
+import { useAtom } from "jotai";
+// import { atomWithHash } from "jotai/utils";
+import { idAtom, pageAtom } from "../atoms";
 
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -25,10 +28,10 @@ interface ProductTableProps {
 export default function ProductTable({ setLoading }: ProductTableProps) {
   const { state, dispatch } = useContext(GlobalState);
   const [items, setItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const [currentPage, setCurrentPage] = useAtom(pageAtom);
   // const [itemsPerPage, setItemsPerPage] = useState(0);
   const [idInput, setIdInput] = useState(0);
-  const [selectedId, setSelectedId] = useState(0);
+  const [selectedId, setSelectedId] = useAtom(idAtom);
 
   // 5 items per page
   const emptyRows =
@@ -49,10 +52,18 @@ export default function ProductTable({ setLoading }: ProductTableProps) {
     getProducts();
   }, [dispatch, setLoading]);
 
+  // updating items array based on selectedId
   useEffect(() => {
-    setItems(state.data);
+    selectedId
+      ? setItems(
+          state.data.filter((item) =>
+            selectedId ? item["id"] === selectedId : item["id"]
+          )
+        )
+      : setItems(state.data);
+
     setLoading(false);
-  }, [state]);
+  }, [state, selectedId, setLoading]);
 
   function handleChangePage(
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -179,7 +190,7 @@ export default function ProductTable({ setLoading }: ProductTableProps) {
                   selectedId ? item["id"] === selectedId : item["id"]
                 )
                 .slice(currentPage * 5, currentPage * 5 + 5)
-                .map(({ id, name, year, color, pantone_value }) => (
+                .map(({ id, name, year, color }) => (
                   <TableRow
                     key={id}
                     sx={{
