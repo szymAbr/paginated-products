@@ -1,13 +1,11 @@
 import { createContext, useReducer } from "react";
 
 const initialState = {
-  products: {
-    page: 0,
-    per_page: 0,
-    total: 0,
-    total_pages: 0,
-    data: [],
-  },
+  page: 0,
+  per_page: 0,
+  total: 0,
+  total_pages: 0,
+  data: [],
 };
 
 type AppState = typeof initialState;
