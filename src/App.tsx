@@ -5,7 +5,7 @@ import { Container } from "@mui/system";
 import { Backdrop, CircularProgress } from "@mui/material";
 
 export default function App() {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   return (
     <GlobalProvider>
