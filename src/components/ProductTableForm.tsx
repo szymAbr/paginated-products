@@ -19,7 +19,7 @@ export default function ProductTableForm({
   idInput,
 }: ProductTableFormProps) {
   return (
-    <form onSubmit={(e) => handleSubmit(e)}>
+    <form onSubmit={(e) => handleSubmit(e)} aria-label="id filter form">
       <TextField
         id="outlined-basic"
         label="Filter by ID"
