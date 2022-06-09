@@ -10,7 +10,7 @@ export default function App() {
   return (
     <GlobalProvider>
       <Container>
-        <ProductTable loading={loading} setLoading={setLoading} />
+        <ProductTable setLoading={setLoading} />
 
         <Backdrop
           sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
