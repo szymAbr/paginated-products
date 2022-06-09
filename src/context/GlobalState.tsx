@@ -5,10 +5,19 @@ const initialState = {
   per_page: 0,
   total: 0,
   total_pages: 0,
-  data: [],
+  data: [
+    {
+      id: 0,
+      name: "",
+      year: 0,
+      color: "",
+      pantone_value: "",
+    },
+  ],
 };
 
-type AppState = typeof initialState;
+export type AppState = typeof initialState;
+export type DataItems = typeof initialState.data;
 
 type Action = {
   type: "SET_PRODUCTS";
