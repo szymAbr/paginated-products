@@ -9,7 +9,7 @@ interface ProductTableFormProps {
   ) => void;
   handleSubmit: (e: FormEvent<HTMLFormElement>) => void;
   handleClear: () => void;
-  idInput: number;
+  idInput: string;
 }
 
 export default function ProductTableForm({
@@ -25,7 +25,7 @@ export default function ProductTableForm({
         label="Filter by ID"
         variant="outlined"
         type="text"
-        value={idInput ? idInput : ""}
+        value={idInput}
         onChange={(e) => handleChange(e)}
       />
 

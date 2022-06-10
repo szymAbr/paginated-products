@@ -22,7 +22,7 @@ export default function ProductTable({ setLoading }: ProductTableProps) {
   const { state, dispatch } = useContext(GlobalState);
   const [items, setItems] = useState(state.data);
   const [currentPage, setCurrentPage] = useAtom(pageAtom);
-  const [idInput, setIdInput] = useState(0);
+  const [idInput, setIdInput] = useState("");
   const [selectedId, setSelectedId] = useAtom(idAtom);
 
   // 5 items per page - avoid content jumping
@@ -67,19 +67,25 @@ export default function ProductTable({ setLoading }: ProductTableProps) {
   function handleChange(
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) {
-    const input = parseInt(e.target.value);
+    const input = e.target.value;
 
-    !isNaN(input) && input >= 0 && input < 10000 && setIdInput(input);
+    input === "" && setIdInput("");
+
+    !isNaN(parseInt(input)) &&
+      !isNaN(parseInt(input[input.length - 1])) &&
+      parseInt(input) < 10000 &&
+      input[0] !== "0" &&
+      setIdInput(input);
   }
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    setSelectedId(idInput);
+    setSelectedId(parseInt(idInput));
+    setIdInput("");
   }
 
   function handleClear() {
-    setIdInput(0);
     setSelectedId(0);
   }
 
