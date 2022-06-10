@@ -2,7 +2,7 @@
 
 ## Summary
 
-Simple app fetching data from an API and rendering the data in a paginated table, with filtering by ID possible. Both the filter and the current page are included in the URL. Built with React, TypeScript, Material UI.
+Simple app fetching data from an API and rendering items in a paginated table, with filtering by ID possible. Both the filter and the current page are included in the URL. Built with React, TypeScript and Material UI.
 
 ## Unit tests
 
